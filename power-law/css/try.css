@@ -1,0 +1,49 @@
+.blocklydiv-c {
+    margin-left: 5%;
+    width: 60%;
+    float: left;
+    height: 600px;
+    display: flex;
+    flex-direction: column;
+}
+
+.blocklydiv-c > div {
+    height: 300px;
+    width: 100%;
+    margin: 5px 0;
+}
+
+#panel {
+    float: left;
+    margin-left: 4%;
+    margin-top: 22px;
+}
+
+.img-display {
+    padding-top: 50px;
+    margin-left: 5%;
+    clear:both;
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: baseline;
+}
+.img-display div {
+    padding-right: 1em;
+}
+.img-display h2 {
+    padding: .1em;
+}
+.img-display img {
+    width: 100%;
+    border: 1px solid;
+}
+
+#file {
+    display: none;
+}
+#notice {
+    color: red;
+    margin: 0;
+    padding: 0;
+}
