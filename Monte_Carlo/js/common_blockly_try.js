@@ -140,17 +140,66 @@ class AnmPIM {
     this.ctx = mc.getContext('2d')
     this.canvasSize = 300
   }
+
   drawBackground() {
-    this.ctx.clearRect(0, 0, this.canvasSize, this.canvasSize)
-    this.ctx.beginPath()
-    this.ctx.strokeStyle = '#888'
-    this.ctx.arc(0, this.canvasSize, this.canvasSize - 1, -0.5 * Math.PI, 0)
-    this.ctx.stroke()
+    this.ctx.clearRect(0, 0, this.canvasSize, this.canvasSize);
+    this.ctx.beginPath();
+    this.ctx.strokeStyle = '#888';
+    this.ctx.arc(0, this.canvasSize, this.canvasSize - 1, -0.5 * Math.PI, 0);
+    this.ctx.stroke();
+
+    // Draw horizontal and vertical axes
+    this.ctx.strokeStyle = '#000';
+    this.ctx.beginPath();
+    this.ctx.moveTo(0, this.canvasSize);
+    this.ctx.lineTo(this.canvasSize, this.canvasSize);
+    this.ctx.moveTo(0, this.canvasSize);
+    this.ctx.lineTo(0, 0);
+    this.ctx.stroke();
+
+    // Draw tick marks and labels on the x-axis
+    const tickSizeX = 10; // Length of tick marks on x-axis
+    const tickIntervalX = 30; // Interval between tick marks on x-axis
+    this.ctx.strokeStyle = '#000';
+    this.ctx.fillStyle = '#000';
+    this.ctx.font = '12px Arial';
+    this.ctx.textAlign = 'center';
+    this.ctx.beginPath();
+    for (let i = tickIntervalX; i <= this.canvasSize; i += tickIntervalX) {
+      this.ctx.moveTo(i, this.canvasSize); ``
+      this.ctx.lineTo(i, this.canvasSize - tickSizeX);
+
+      const label = (i / this.canvasSize).toFixed(1);
+      this.ctx.fillText(label, i, this.canvasSize - tickSizeX - 1);
+    }
+    this.ctx.stroke();
+
+    // Draw tick marks and labels on the y-axis
+    const tickSizeY = 10; // Length of tick marks on y-axis
+    const tickIntervalY = 30; // Interval between tick marks on y-axis
+    this.ctx.strokeStyle = '#000';
+    this.ctx.fillStyle = '#000';
+    this.ctx.font = '12px Arial';
+    this.ctx.textAlign = 'end';
+    this.ctx.beginPath();
+    for (let i = tickIntervalY; i <= this.canvasSize; i += tickIntervalY) {
+      this.ctx.moveTo(4, i);
+      this.ctx.lineTo(tickSizeY, i);
+
+      const label = (1 - i / this.canvasSize).toFixed(1);
+      this.ctx.fillText(label, tickSizeY + 10, i);
+    }
+    this.ctx.stroke();
+
     this.counter = {
       total: 0,
       hint: 0
-    }
+    };
   }
+
+
+
+
   plotOnCanvas(x, y, color) {
     color && (this.ctx.fillStyle = color)
     this.ctx.beginPath()
