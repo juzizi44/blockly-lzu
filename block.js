@@ -871,6 +871,45 @@ Blockly.JavaScript['math_custom_log'] = function (block) {
   return [code, Blockly.JavaScript.ORDER_ATOMIC];
 };
 
+Blockly.defineBlocksWithJsonArray([
+  {
+    "type": "math_normal_distribution",
+    "message0": "random normal distribution %1 mean %2 standard deviation %3",
+    "args0": [
+      {
+        "type": "input_dummy"
+      },
+      {
+        "type": "input_value",
+        "name": "MEAN",
+        "check": "Number"
+      },
+      {
+        "type": "input_value",
+        "name": "STD_DEV",
+        "check": "Number"
+      }
+    ],
+    "output": "Number",
+    "colour": Blockly.Msg['MATH_HUE'],
+    "tooltip": "Generate a random number from normal distribution",
+    "helpUrl": ""
+  }
+]);
+
+Blockly.JavaScript['math_normal_distribution'] = function (block) {
+  // Normal distribution random number generation.
+  var mean = Blockly.JavaScript.valueToCode(block, 'MEAN', Blockly.JavaScript.ORDER_ATOMIC);
+  var stdDev = Blockly.JavaScript.valueToCode(block, 'STD_DEV', Blockly.JavaScript.ORDER_ATOMIC);
+
+  var code = `Math.sqrt(-2.0 * Math.log((function() { let u; while (!(u = Math.random())); return u; })())) * Math.cos(2.0 * Math.PI * Math.random()) * ${stdDev} + ${mean}`;
+
+  return [code, Blockly.JavaScript.ORDER_ATOMIC];
+};
+
+
+
+
 
 Blockly.defineBlocksWithJsonArray([{
     "type": "move",
