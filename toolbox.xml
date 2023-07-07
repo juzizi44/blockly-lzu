@@ -1,4 +1,3 @@
-
 <xml id="toolbox" style="display: none">
 
       <category name="Variables" colour="%{BKY_VARIABLES_HUE}">
@@ -193,7 +192,7 @@
       <category name="Functions" colour="#995ba5" custom="PROCEDURE"></category>
       <category name="Text" colour="#5ba58c">
         <block type="text">
-              <field name="TEXT"></field>
+          <field name="TEXT"></field>
           </block>
           <block type="text_join">
               <mutation items="2"></mutation>
@@ -201,45 +200,45 @@
           <block type="text_append">
               <field name="VAR" id="bJdb!WopF]/.X@@SV{F1">item</field>
               <value name="TEXT">
-                  <shadow type="text">
-                    <field name="TEXT"></field>
-                  </shadow>
+                <shadow type="text">
+                  <field name="TEXT"></field>
+                </shadow>
               </value>
           </block>
           <block type="text_length">
               <value name="VALUE">
-                  <shadow type="text">
-                    <field name="TEXT">abc</field>
-                  </shadow>
+                <shadow type="text">
+                  <field name="TEXT">abc</field>
+                </shadow>
               </value>
           </block>
           <block type="text_isEmpty">
               <value name="VALUE">
-                  <shadow type="text">
-                    <field name="TEXT"></field>
-                  </shadow>
+                <shadow type="text">
+                  <field name="TEXT"></field>
+                </shadow>
               </value>
           </block>
           <block type="text_indexOf">
               <field name="END">FIRST</field>
               <value name="VALUE">
-                  <block type="variables_get">
-                    <field name="VAR" id="^8}pRP4?X4K#!A]i;Ju%">text</field>
-                  </block>
+                <block type="variables_get">
+                  <field name="VAR" id="^8}pRP4?X4K#!A]i;Ju%">text</field>
+                </block>
               </value>
               <value name="FIND">
-                  <shadow type="text">
-                    <field name="TEXT">abc</field>
-                  </shadow>
+                <shadow type="text">
+                  <field name="TEXT">abc</field>
+                </shadow>
               </value>
           </block>
           <block type="text_charAt">
               <mutation at="true"></mutation>
               <field name="WHERE">FROM_START</field>
               <value name="VALUE">
-                  <block type="variables_get">
-                    <field name="VAR" id="^8}pRP4?X4K#!A]i;Ju%">text</field>
-                  </block>
+                <block type="variables_get">
+                  <field name="VAR" id="^8}pRP4?X4K#!A]i;Ju%">text</field>
+                </block>
               </value>
           </block>
           <block type="text_getSubstring">
@@ -247,41 +246,41 @@
               <field name="WHERE1">FROM_START</field>
               <field name="WHERE2">FROM_START</field>
               <value name="STRING">
-                  <block type="variables_get">
-                    <field name="VAR" id="^8}pRP4?X4K#!A]i;Ju%">text</field>
-                  </block>
+                <block type="variables_get">
+                  <field name="VAR" id="^8}pRP4?X4K#!A]i;Ju%">text</field>
+                </block>
               </value>
           </block>
           <block type="text_changeCase">
               <field name="CASE">UPPERCASE</field>
               <value name="TEXT">
-                  <shadow type="text">
-                    <field name="TEXT">abc</field>
-                  </shadow>
+                <shadow type="text">
+                  <field name="TEXT">abc</field>
+                </shadow>
               </value>
           </block>
           <block type="text_trim">
               <field name="MODE">BOTH</field>
               <value name="TEXT">
-                  <shadow type="text">
-                    <field name="TEXT">abc</field>
-                  </shadow>
+                <shadow type="text">
+                  <field name="TEXT">abc</field>
+                </shadow>
               </value>
           </block>
           <block type="text_print">
               <value name="TEXT">
-                  <shadow type="text">
-                    <field name="TEXT">abc</field>
-                  </shadow>
+                <shadow type="text">
+                  <field name="TEXT">abc</field>
+                </shadow>
               </value>
           </block>
           <block type="text_prompt_ext">
               <mutation type="TEXT"></mutation>
               <field name="TYPE">TEXT</field>
               <value name="TEXT">
-                  <shadow type="text">
-                    <field name="TEXT">abc</field>
-                  </shadow>
+                <shadow type="text">
+                  <field name="TEXT">abc</field>
+                </shadow>
               </value>
           </block>
           </category>
@@ -335,45 +334,45 @@
               </value>
             </block>
             <block type="lists_sort"></block>
-          </category>
-          
-          <category name="Colour" colour="#a5745b">
-            <block type="colour_picker">
-              <field name="COLOUR">#ff0000</field>
+            </category>
+            
+            <category name="Colour" colour="#a5745b">
+              <block type="colour_picker">
+                <field name="COLOUR">#ff0000</field>
           </block>
           <block type="colour_random"></block>
           <block type="colour_rgb">
               <value name="RED">
-                  <shadow type="math_number">
-                    <field name="NUM">100</field>
-                  </shadow>
+                <shadow type="math_number">
+                  <field name="NUM">100</field>
+                </shadow>
               </value>
               <value name="GREEN">
-                  <shadow type="math_number">
-                    <field name="NUM">50</field>
-                  </shadow>
+                <shadow type="math_number">
+                  <field name="NUM">50</field>
+                </shadow>
               </value>
               <value name="BLUE">
-                  <shadow type="math_number">
-                    <field name="NUM">0</field>
-                  </shadow>
+                <shadow type="math_number">
+                  <field name="NUM">0</field>
+                </shadow>
               </value>
           </block>
           <block type="colour_blend">
               <value name="COLOUR1">
-                  <shadow type="colour_picker">
-                    <field name="COLOUR">#ff0000</field>
-                  </shadow>
+                <shadow type="colour_picker">
+                  <field name="COLOUR">#ff0000</field>
+                </shadow>
               </value>
               <value name="COLOUR2">
-                  <shadow type="colour_picker">
-                    <field name="COLOUR">#3333ff</field>
-                  </shadow>
+                <shadow type="colour_picker">
+                  <field name="COLOUR">#3333ff</field>
+                </shadow>
               </value>
               <value name="RATIO">
-                  <shadow type="math_number">
-                    <field name="NUM">0.5</field>
-                  </shadow>
+                <shadow type="math_number">
+                  <field name="NUM">0.5</field>
+                </shadow>
               </value>
           </block>
           </category>
@@ -390,10 +389,10 @@
               <field name="map_name">map</field>
             </block>
             <block type="sort_map"></block>
-          </category>
-          
-          <category name="Config" colour="#5ba58c">
-            <block type="person_block">
+            </category>
+            
+            <category name="Config" colour="#5ba58c">
+              <block type="person_block">
               <field name="person_block_n">default</field>
               <field name="person_block_c">0</field>
               <field name="Asymptomatic_rate">0.5</field>
@@ -402,10 +401,10 @@
               <field name="duration">28</field>
               <field name="person_block_d">uniform</field>
             </block>
-          </category>
-          
-          <category name="Action" colour="#9fa55b">
-            <block type="action_moveto">
+            </category>
+            
+            <category name="Action" colour="#9fa55b">
+              <block type="action_moveto">
               <field name="moveto_d">1000</field>
             </block>
             <block type="action_timeout">
@@ -424,21 +423,21 @@
               <field name="X">50</field>
               <field name="Y">50</field>
             </block>
-          </category>
-          
-          <category name="State" colour="#a55b80">
-            <block type="value_is_symptomatic"></block>
-            <block type="value_is_pcr">
+            </category>
+            
+            <category name="State" colour="#a55b80">
+              <block type="value_is_symptomatic"></block>
+              <block type="value_is_pcr">
               <field name="fack_n">0</field>
               <field name="fack_e">0</field>
             </block>
-          </category>
-          
-          <category name="Visualization" colour="%{BKY_LOGIC_HUE}">
-            <block type="draw_line"></block>
-          </category>
-          
-          <category name="遗传" colour="#5ba55b">
+            </category>
+            
+            <category name="Visualization" colour="%{BKY_LOGIC_HUE}">
+              <block type="draw_line"></block>
+            </category>
+            
+            <category name="遗传" colour="#5ba55b">
             <block type="define_gene_structure"></block>
             <block type="define_functions"></block>
             <block type="selection"></block>
@@ -463,6 +462,6 @@
           
           <category name="hanoi" colour="#5b67a5">
             <block type="move"></block>
-          </category>
-          
-          </xml>
+            <block type="set_pillar"></block>
+            </category>
+</xml>

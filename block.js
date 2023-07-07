@@ -945,6 +945,32 @@ Blockly.defineBlocksWithJsonArray([{
     return code
   }
 
+Blockly.defineBlocksWithJsonArray([
+  {
+    "type": "set_pillar",
+    "message0": "柱子%1",
+    "args0": [
+      {
+        "type": "field_number",
+        "name": "pillar"
+      }
+    ],
+
+    "output": null,
+
+    "colour": 230,
+    "tooltip": "",
+    "helpUrl": ""
+  }
+]);
+
+Blockly.JavaScript['set_pillar'] = function (block) {
+  var num = block.getFieldValue('pillar')
+  var code = '"柱子" + ' + num;
+  return [code, Blockly.JavaScript.ORDER_ATOMIC];
+};
+
+
 // 幂律增加的块===================================================
 
   Blockly.defineBlocksWithJsonArray([{

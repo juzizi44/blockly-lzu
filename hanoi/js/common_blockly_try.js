@@ -1,37 +1,3 @@
-Blockly.defineBlocksWithJsonArray([{
-  "type": "move",
-  "message0": "move NO.%1 plate from position %2 to position %3",
-  "args0": [
-    {
-      "type": "input_value",
-      "name": "plate"
-    },
-    {
-      "type": "input_value",
-      "name": "start"
-    },
-    {
-      "type": "input_value",
-      "name": "end"
-    }
-  ],
-  "inputsInline": true,
-  "previousStatement": null,
-  "nextStatement": null,
-  "colour": 230,
-  "tooltip": "",
-  "helpUrl": ""
-}])
-
-Blockly.JavaScript['move'] = function(block) {
-  var value_plate = Blockly.JavaScript.valueToCode(block, 'plate', Blockly.JavaScript.ORDER_ATOMIC)
-  var value_start = Blockly.JavaScript.valueToCode(block, 'start', Blockly.JavaScript.ORDER_ATOMIC)
-  var value_end = Blockly.JavaScript.valueToCode(block, 'end', Blockly.JavaScript.ORDER_ATOMIC)
-  
-  var code = `move(${value_plate}, ${value_start}, ${value_end})\n`
-  return code
-}
-
 const workspace = Blockly.inject('blocklydiv', {
   toolbox: document.getElementById('toolbox'),
   media: 'media/',
@@ -43,6 +9,8 @@ try {
 } catch (error) {
   
 }
+
+
 
 function exportCode() {
   alert(Blockly.JavaScript.workspaceToCode(workspace))
@@ -75,10 +43,15 @@ function changeHanoi(plateNum = 3) {
 changeHanoi()
 
 function runCode() {
-  const code = 'let listOfAction = [];\n\
-                function move(plate, src, dst) {\n\
-                  listOfAction.push([plate - 1, src - 1, dst - 1])\n\
-                };\n' + Blockly.JavaScript.workspaceToCode(workspace) + 
-                ';\nwindow.vm.$data.actionList= listOfAction;'
-  window.eval(code)
+  const code = 'let listOfAction = [];\n' +
+    'function move(plate, src, dst) {\n' +
+    '  const srcIndex = Number(src.replace("柱子", "")) - 1;\n' +
+    '  const dstIndex = Number(dst.replace("柱子", "")) - 1;\n' +
+    '  listOfAction.push([plate - 1, srcIndex, dstIndex]);\n' +
+    '};\n' +
+    Blockly.JavaScript.workspaceToCode(workspace) +
+    ';\nwindow.vm.$data.actionList = listOfAction;';
+
+  console.log(code);
+  window.eval(code);
 }
