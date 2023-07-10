@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Wealth Distribution</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!-- 引入 Chart.js 库 -->
+</head>
+
+<body>
+    <h1>Wealth Distribution</h1>
+
+    <canvas id="wealthChart" width="400" height="200"></canvas>
+    <!-- 创建一个 canvas 元素 -->
+
+
+
+    <script>
+        var money, peopleNumber, meetTimes, individuals, result, giverIndex, receiverIndex, nowMoney;
+
+        function listsRepeat(value, n) {
+            var array = [];
+            for (var i = 0; i < n; i++) {
+                array[i] = value;
+            }
+            return array;
+        }
+
+        function mathRandomInt(a, b) {
+            if (a > b) {
+                // Swap a and b to ensure a is smaller.
+                var c = a;
+                a = b;
+                b = c;
+            }
+            return Math.floor(Math.random() * (b - a + 1) + a);
+        }
+
+        function listsGetSortCompare(type, direction) {
+            var compareFuncs = {
+                "NUMERIC": function (a, b) {
+                    return Number(a) - Number(b);
+                },
+                "TEXT": function (a, b) {
+                    return a.toString() > b.toString() ? 1 : -1;
+                },
+                "IGNORE_CASE": function (a, b) {
+                    return a.toString().toLowerCase() > b.toString().toLowerCase() ? 1 : -1;
+                },
+            };
+            var compare = compareFuncs[type];
+            return function (a, b) { return compare(a, b) * direction; }
+        }
+
+        // Describe this function...
+        function randomLife(money, peopleNumber, meetTimes) {
+            individuals = listsRepeat(money, peopleNumber);
+            for (var count = 0; count < meetTimes; count++) {
+                giverIndex = mathRandomInt(1, peopleNumber);
+                receiverIndex = mathRandomInt(1, peopleNumber);
+                while (giverIndex == receiverIndex) {
+                    receiverIndex = mathRandomInt(1, peopleNumber);
+                }
+                if (individuals[(giverIndex - 1)] > 0) {
+                    nowMoney = individuals[(giverIndex - 1)];
+                    individuals[(giverIndex - 1)] = nowMoney - 1;
+                    nowMoney = individuals[(receiverIndex - 1)];
+                    individuals[(receiverIndex - 1)] = nowMoney + 1;
+                }
+            }
+            individuals = individuals.slice().sort(listsGetSortCompare("NUMERIC", -1));
+            return individuals;
+        }
+
+
+        result = randomLife(100, 30, 1000000);
+
+        money = 0;
+
+        individuals = randomLife(null, 30, 1000000);
+
+
+        // resault = do_something(30, 100000000);s
+        console.log(result);
+
+        // function simulateRandomLife(N, iterations) {
+        //     // 创建一个具有N个同质个体的系统
+        //     let individuals = [];
+        //     for (let i = 0; i < N; i++) {
+        //         individuals.push(100); // 每个个体初始财富为100
+        //     }
+
+        //     // 进行指定次数的随机相遇和财富交换
+        //     for (let iter = 0; iter < iterations; iter++) {
+        //         let giverIndex = Math.floor(Math.random() * N); // 随机选择一个给予者
+        //         let receiverIndex = Math.floor(Math.random() * N); // 随机选择一个接收者
+
+        //         // 确保给予者和接收者不是同一个人
+        //         while (giverIndex === receiverIndex) {
+        //             receiverIndex = Math.floor(Math.random() * N);
+        //         }
+        //         if (individuals[giverIndex] >= 0) {
+
+        //             individuals[giverIndex] -= 1; // 给予者减少1块钱
+        //             individuals[receiverIndex] += 1; // 接收者增加1块钱
+        //         }
+        //     }
+
+        //     return individuals;
+        // }
+
+        // // 运行模拟并输出结果
+        // const N = 30; // 个体数量
+        // const iterations = 100000000; // 迭代次数
+
+        // // const wealthDistribution = simulateRandomLife(N, iterations);
+
+        // let wealthDistribution = simulateRandomLife(N, iterations);
+
+        // // 对wealthDistribution进行排序（从大到小）
+        // wealthDistribution = wealthDistribution.sort((a, b) => b - a);
+        // console.log(wealthDistribution);
+
+
+
+        wealthDistribution = result;
+        // 绘制柱状图
+        const ctx = document.getElementById('wealthChart').getContext('2d');
+        const labels = wealthDistribution.map((_, index) => `Individual ${index + 1}`);
+        const data = wealthDistribution;
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Wealth Distribution',
+                    data: data,
+                    backgroundColor: 'rgba(54, 162, 235, 0.5)', // 柱状图背景颜色
+                    borderColor: 'rgba(54, 162, 235, 1)', // 柱状图边框颜色
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Wealth'
+                        }
+                    },
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Individual'
+                        }
+                    }
+                }
+            }
+        });
+
+    </script>
+
+</body>
+
+</html>
