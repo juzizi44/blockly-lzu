@@ -14,9 +14,9 @@
     <script src="https://cdn.jsdelivr.net/npm/blockly@4.20201217.0/javascript_compressed.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/blockly@4.20201217.0/python_compressed.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/blockly@4.20201217.0/msg/en.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 
-    <link rel="stylesheet" href="simulate_random_life/css/try.css">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
         integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
@@ -36,7 +36,7 @@
         .blocklydiv-c {
             position: absolute;
             width: 100%;
-            height: 94%;
+            height: 100%;
             margin: 0;
             padding: 0;
         }
@@ -48,29 +48,6 @@
             height: 100%;
         }
 
-        #blocklydiv2 {
-            margin: 0;
-            padding: 0;
-            height: 100%;
-        }
-
-        #textarea {
-            width: 100%;
-            height: 150px;
-            padding: 10px;
-            font-size: 16px;
-            line-height: 1.5;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-            resize: vertical;
-            box-sizing: border-box;
-        }
-
-        #textarea:focus {
-            outline: none;
-            border: 1px solid #0077ff;
-            box-shadow: 0 0 3px rgba(0, 119, 255, 0.5);
-        }
     </style>
 
 <body>
@@ -133,24 +110,12 @@
                                 <a class="nav-link  active" href="simulate_random_life.html">随机人生 <span
                                         class="sr-only">(current)</span> </a>
                             </li>
-                            <!-- <li class="nav-item">
-                                <a class="nav-link" href="Dijkstra.html">迪杰斯特拉</a>
-                            </li> -->
                         </ul>
-                        <!-- <ul class="navbar-nav ml-md-auto">
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">返回首页</a>
-                            </li>
-
-                        </ul> -->
-
                     </div>
-
                 </nav>
 
                 <div class="row">
                     <div class="col-md-12 up-style">
-
                         <div class="tab-content" id="myTabContent">
                             <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                                 <div class="blocklydiv-c">
@@ -161,56 +126,29 @@
                         </div>
                     </div>
 
-
-
-
                     <div class="col-md-12 down-style">
-
-
                         <div class="col-md-12 " style="margin-top:20px;margin-left:20px;padding-right: 4%;">
                             <h3 class="text-left" style=" font-size: 20px;">
                                 结果可视化:
                             </h3>
                             <div style="border-radius: 10px; border: solid rgba(33, 84, 118, 0.28);min-height:250px;">
                                 <div id="visualization" style=" padding-top: 30px;clear: both;">
+                                    <canvas id="wealthChart" width="400" height="100"></canvas>
                                 </div>
                             </div>
                         </div>
 
                         <div class="col-md-12 " style="margin-left:20px;padding-right: 4%;">
-                            <div>
-                                <label style="color: rgb(120, 24, 113);">请输入文本：</label>
-                                <a id="notice"></a>
-                                <p>
-                                    <input type="file" id="file" accept="text/plain">
-                                    <textarea id="textarea" cols="30" rows="7" wrap="virtual" style="height: 80px;"
-                                        placeholder="导入文件或手动输入文本"></textarea>
-                                </p>
-                            </div>
-                            <div id="panel" style="margin-left: 0;">
-                                <button type="button" onclick="fileInput()" id="upload">导入文件</button>
-                                <button type="button" onclick="countWord()">统计词频</button>
-                                <button type="button" onclick="exportCode()">导出代码</button>
+                            <div id="panel" style="margin-left: 0; margin-top: 10px;">
+                                <button type="button" class="btn btn-primary" onclick="drawChart()">模拟结果</button>
+                                <button type="button" class="btn btn-primary" onclick="exportCode()">导出代码</button>
                                 <br><br>
                             </div>
                         </div>
-
-
                     </div>
                 </div>
             </div>
         </div>
-
-        <!-- <script>
-            //嘿,获取xml的办法
-            // 获取 Blockly 工作区的 XML 定义
-            var xml = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
-            // 将 XML 定义转换为可读的文本格式
-            var code = Blockly.Xml.domToPrettyText(xml);
-            // 输出代码到控制台
-            console.log(code);
-        </script> -->
-
 
         <xml id="toolbox" style="display: none">
 
@@ -681,10 +619,17 @@
             </category>
         </xml>
         <script src="block.js"></script>
+        <script src="visualization.js"></script>
 
-
-
-
+        <!-- <script>
+                                    //嘿,获取xml的办法
+                                    // 获取 Blockly 工作区的 XML 定义
+                                    var xml = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
+                                    // 将 XML 定义转换为可读的文本格式
+                                    var code = Blockly.Xml.domToPrettyText(xml);
+                                    // 输出代码到控制台
+                                    console.log(code);
+                                </script> -->
         <xml xmlns="https://developers.google.com/blockly/xml" id="workspaceBlocks1" style="display:none">
             <variables>
                 <variable id="m.{q@E{D$1Ye,`#K5)x;">money</variable>
@@ -1138,7 +1083,4 @@
 
 
 </body>
-
-
-
 </html>

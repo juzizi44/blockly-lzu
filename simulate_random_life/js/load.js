@@ -1,4 +1,3 @@
-
 const workspace1 = Blockly.inject('blocklydiv1', {
   toolbox: document.getElementById('toolbox'),
   media: 'media/',
@@ -6,173 +5,101 @@ const workspace1 = Blockly.inject('blocklydiv1', {
   maxTrashcanContents: 5
 })
 
-// 做了改动
-if (document.getElementById("workspaceBlocks1")) {
-  Blockly.Xml.domToWorkspace(document.getElementById("workspaceBlocks1"), workspace1)
-}
-
 
 function exportCode() {
-  alert(`${Blockly.JavaScript.workspaceToCode(workspace1)}`)
+  const code = Blockly.JavaScript.workspaceToCode(workspace1);
+
+  // 创建一个包含多行文本的文本区域
+  const textArea = document.createElement("textarea");
+  textArea.value = code;
+  textArea.style.width = "400px";
+  textArea.style.height = "400px";
+  textArea.style.padding = '10px';
+
+  // 创建关闭按钮
+  const closeButton = document.createElement("button");
+  closeButton.textContent = "Close";
+  closeButton.style.margin = "10px";
+  closeButton.addEventListener("click", function () {
+    // 关闭对话框时从页面中移除对话框元素
+    document.body.removeChild(dialog);
+  });
+
+  // 创建自定义对话框
+  const dialog = document.createElement("div");
+  dialog.style.position = "fixed";
+  dialog.style.top = "50%";
+  dialog.style.left = "50%";
+  dialog.style.transform = "translate(-50%, -50%)";
+  dialog.style.padding = "10px";
+  dialog.style.backgroundColor = "#fff";
+  dialog.style.boxShadow = "0 0 10px rgba(0, 0, 0, 0.3)";
+  dialog.style.borderRadius = "10px"; // 添加圆角
+  dialog.style.display = "flex"; // 使用flexbox布局
+  dialog.style.flexDirection = "column"; // 垂直布局
+  dialog.appendChild(textArea);
+  dialog.appendChild(closeButton);
+
+  // 设置对话框在页面中置顶
+  dialog.style.zIndex = "9999";
+
+  // 添加对话框到页面中
+  document.body.appendChild(dialog);
 }
 
 
-function evalAndCheck1(funcName) { // 是否未更新: true未更新 false更新 -1未找到 其他error
-  const code1 = Blockly.JavaScript.workspaceToCode(workspace1)
-  let oldFuncSrc = ""
-  if (window.hasOwnProperty(funcName)) { // 已有该函数
-    oldFuncSrc = window[funcName].toString()
-  }
-  try {
-    window.eval(code1)
-  } catch (error) {
-    return error
-  }
-  if (window.hasOwnProperty(funcName)) {
-    return oldFuncSrc == window[funcName].toString()
-  } else {
-    return -1
-  }
+Blockly.Xml.domToWorkspace(document.getElementById("workspaceBlocks1"), workspace1)
+
+
+
+function drawChart() {
+  // 在每次执行 drawChart 之前销毁之前的 Chart 实例
+  if (window.myChart) {
+    window.myChart.destroy();
 }
+  // 执行 Blockly.JavaScript.workspaceToCode(workspace1) 获取代码结果
+  var code = Blockly.JavaScript.workspaceToCode(workspace1);
 
+  // 执行生成的代码
+  eval(code);
 
-function prepareWord(text) {
-  return text.toLowerCase().replace(/[^a-z]+/g, " ").replace(/\s+/g, " ")
-}
-
-
-function countWord() {
-  const isNotUpdated = evalAndCheck1("WordCount")
-  if (isNotUpdated === false || isNotUpdated === true) {
-    // 新增代码段：检查文本区域是否为空
-    if (textarea.value.trim() === '') {
-      alert("请输入一些文本以计算单词数。")
-      return;
-    }
-    // 正常
-    let listData = window["WordCount"](prepareWord(textarea.value))
-    listData = [["Word", "Count"]].concat(listData)
-    if (listData.length > 1) {
-      drawChart(listData)
-    } else {
-      alert("WordCount函数输出为空，请检查代码和输入文本是否正确")
-    }
-  } else if (isNotUpdated === -1) {
-    // 函数未找到
-    alert("未找到WordCount函数，请检查代码")
-  } else {
-    // 异常
-    alert("代码执行出错，请检查代码\n" + e)
-  }
-  try {
-    delete window["WordCount"]
-  } catch (error) {
-    console.error(error)
-  }
-}
-
-
-
-function drawChart(listData) {
-  var data = google.visualization.arrayToDataTable(listData);
-  console.log(listData);
-  var view = new google.visualization.DataView(data);
-  var chart = new google.visualization.ColumnChart(document.getElementById("visualization"));
-
-  var options = {
-    chartArea: {
-      width: '80%',  // 设置图表区域宽度
-      height: '80%', // 设置图表区域高度
-      left: '10%',   // 设置图表区域左边距
-      top: '2%',    // 设置图表区域上边距
+  // 绘制柱状图
+  const ctx = document.getElementById('wealthChart').getContext('2d');
+  const labels = result.map((_, index) => `Individual ${index + 1}`);
+  const data = result;
+  window.myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: labels,
+      datasets: [{
+        label: 'Wealth Distribution',
+        data: data,
+        backgroundColor: 'rgba(54, 162, 235, 0.5)', // 柱状图背景颜色
+        borderColor: 'rgba(54, 162, 235, 1)', // 柱状图边框颜色
+        borderWidth: 1
+      }]
     },
-    hAxis: {
-      slantedText: true,   // 斜体显示横轴标签
-      slantedTextAngle: 60, // 设置斜体角度
-      format: 'none',      // 禁用自动格式化横轴标签
-      maxAlternation: 1,
-    },
-
-    legend: {
-      position: 'top', // 设置图例位置在顶部
-    },
-    width: '100%',       // 设置整个图表宽度
-    height: 210,         // 设置整个图表高度
-
-  };
-
-  chart.draw(view, options);
-  document.getElementById("visualization").scrollIntoView();
-}
-
-google.charts.load('current', { packages: ['corechart', 'bar'] });
-
-
-
-const textarea = document.getElementById("textarea")
-const file = document.getElementById("file")
-const notice = document.getElementById("notice")
-function fileInput() {
-  const event = new MouseEvent("click")
-  file.dispatchEvent(event)
-}
-function preventEvent(event) {
-  event.stopPropagation()
-  event.preventDefault()
-}
-function fileListHander(list) {
-  if (list.length == 0) {
-    return false
+    options: {
+      responsive: true,
+      scales: {
+        y: {
+          beginAtZero: true,
+          title: {
+            display: true,
+            text: 'Wealth'
+          }
+        },
+        x: {
+          title: {
+            display: true,
+            text: 'Individual'
+          }
+        }
+      }
   }
-  if (list[0].type != "text/plain") {
-    alert('只接受TXT文件')
-    return false
-  }
-  const reader = new FileReader()
-  const f = list[0]
-  reader.addEventListener('load', event => {
-    const text = event.target.result
-    textarea.value = text
-    inputHander()
-  })
-  reader.readAsText(f)
+  });
+
 }
-function checkText(text) {
-  const checkList = [
-    [/[\u2010-\u201F\u3001-\u301F\uFF01-\uFF1F]/, "中文标点符号"],
-    [/[\u4E00-\u9FA5]/, "中文字符"],
-    [/./, "非英文字符"]
-  ]
-  if (text.match(/^[\s!-~]*$/g)) {
-    return null
-  }
-  for (const [check, notice] of checkList) {
-    if (text.match(check)) {
-      return `输入中包含“${notice}”`
-    }
-  }
-  return "非法字符"
-}
-function inputHander(event) {
-  const text = textarea.value
-  console.log(text)
-  const check = checkText(text)
-  if (check) {
-    notice.innerText = check
-  } else {
-    notice.innerText = ""
-  }
-}
-file.addEventListener("change", () => {
-  fileListHander(file.files)
-})
-document.addEventListener("dragenter", preventEvent)
-document.addEventListener("dragover", preventEvent)
-document.addEventListener("drop", event => {
-  preventEvent(event)
-  fileListHander(event.dataTransfer.files)
-})
-textarea.addEventListener("input", inputHander)
 
 
 
