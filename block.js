@@ -1151,3 +1151,114 @@ Blockly.JavaScript['set_pillar'] = function (block) {
     return code;
   };
   
+
+//三门问题
+
+Blockly.defineBlocksWithJsonArray([
+  {
+    "type": "list_delete_value",
+    "message0": "in list %1 delete value %2",
+    "args0": [
+      {
+        "type": "input_value",
+        "name": "LIST",
+        "check": "Array"
+      },
+      {
+        "type": "input_value",
+        "name": "VALUE"
+      }
+    ],
+    "previousStatement": null,
+    "nextStatement": null,
+    "colour": 230,
+    "tooltip": "从列表中删除指定的值",
+    "helpUrl": ""
+  }
+]);
+
+Blockly.JavaScript['list_delete_value'] = function (block) {
+  var list = Blockly.JavaScript.valueToCode(block, 'LIST', Blockly.JavaScript.ORDER_ATOMIC);
+  var value = Blockly.JavaScript.valueToCode(block, 'VALUE', Blockly.JavaScript.ORDER_ATOMIC);
+
+  var code = list + ".splice(" + list + ".indexOf(" + value + "), 1);\n";
+  return code;
+};
+
+
+Blockly.defineBlocksWithJsonArray([
+  {
+    "type": "list_get_random_value",
+    "message0": "Randomly get a value from list %1",
+    "args0": [
+      {
+        "type": "input_value",
+        "name": "LIST",
+        "check": "Array"
+      }
+    ],
+    "output": null,
+    "colour": 230,
+    "tooltip": "从列表中随机获取一个值",
+    "helpUrl": ""
+  }
+]);
+
+Blockly.JavaScript['list_get_random_value'] = function (block) {
+  var list = Blockly.JavaScript.valueToCode(block, 'LIST', Blockly.JavaScript.ORDER_ATOMIC);
+
+  var code = list + "[Math.floor(Math.random() * " + list + ".length)]";
+  return [code, Blockly.JavaScript.ORDER_ATOMIC];
+};
+
+
+
+Blockly.defineBlocksWithJsonArray([
+  {
+    "type": "list_remove_and_random",
+    "message0": "Randomly get a value from list %1 without value %2 and value %3 ",
+    "args0": [
+      {
+        "type": "input_value",
+        "name": "LIST",
+        "check": "Array"
+      },
+      {
+        "type": "input_value",
+        "name": "VALUE1",
+        "check": null
+      },
+      {
+        "type": "input_value",
+        "name": "VALUE2",
+        "check": null
+      }
+    ],
+    "output": null,
+    "colour": 230,
+    "tooltip": "从列表中删除指定值并随机返回一个值",
+    "helpUrl": ""
+  }
+]);
+
+Blockly.JavaScript['list_remove_and_random'] = function (block) {
+  var list = Blockly.JavaScript.valueToCode(block, 'LIST', Blockly.JavaScript.ORDER_ATOMIC);
+  var value1 = Blockly.JavaScript.valueToCode(block, 'VALUE1', Blockly.JavaScript.ORDER_ATOMIC);
+  var value2 = Blockly.JavaScript.valueToCode(block, 'VALUE2', Blockly.JavaScript.ORDER_ATOMIC);
+
+  var code =
+    "re_ra(" + list + ", " + value1 + ", " + value2 + ");\n" +
+    "function re_ra(list, value1, value2) {\n" +
+    "  var list2 = list.slice();\n" +
+    "  var index1 = list.indexOf(value1);\n" +
+    "  var index2 = list.indexOf(value2);\n" +
+    "  list2.splice(index1, 1);\n" +
+    "  list2.splice(index2, 1);\n" +
+    "  var randomIndex = Math.floor(Math.random() * list2.length);\n" +
+    "  return list2[randomIndex];\n" +
+    "}\n" +
+    "\n";
+
+  return [code, Blockly.JavaScript.ORDER_ATOMIC];
+  // return code;
+};
