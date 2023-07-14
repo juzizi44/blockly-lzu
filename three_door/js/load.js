@@ -65,6 +65,18 @@ function result() {
 `;
 }
 
+window.addEventListener('DOMContentLoaded', function () {
+  var navItems = document.querySelectorAll('li.nav-item');
+  var targetHref = 'three_door.html';
+
+  navItems.forEach(function (item) {
+    var link = item.querySelector('a.nav-link');
+    if (link.getAttribute('href') === targetHref) {
+      link.classList.add('active');
+    }
+  });
+});
+
 
 
 

@@ -276,3 +276,15 @@ document.addEventListener("drop", event => {
     fileListHander(event.dataTransfer.files)
 })
 textarea.addEventListener("input", inputHander)
+
+window.addEventListener('DOMContentLoaded', function () {
+  var navItems = document.querySelectorAll('li.nav-item');
+  var targetHref = 'power_law.html';
+
+  navItems.forEach(function (item) {
+    var link = item.querySelector('a.nav-link');
+    if (link.getAttribute('href') === targetHref) {
+      link.classList.add('active');
+    }
+  });
+});
