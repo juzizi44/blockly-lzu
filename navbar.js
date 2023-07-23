@@ -45,6 +45,9 @@ function loadNavbar() {
             <li class="nav-item">
               <a class="nav-link " href="three_door.html">三门问题 </a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link " href="koch.html">科赫曲线 </a>
+            </li>
           </ul>
         </div>
       </nav>

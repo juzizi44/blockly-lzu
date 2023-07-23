@@ -5,6 +5,8 @@ var toolBox = `
     <block type="graph_get_x"></block>
     <block type="graph_set_y"></block>
     <block type="variables_set"></block>
+    <block type="internal_variables_set"></block>
+
     <block type="variables_get"></block>
 
     <block type="math_change"></block>
@@ -78,6 +80,43 @@ var toolBox = `
         </shadow>
       </value>
     </block>
+
+    <block type="math_arithmetic_3vars">
+    <value name="A">
+      <shadow type="math_number">
+        <field name="NUM">1</field>
+      </shadow>
+    </value>
+    <value name="B">
+      <shadow type="math_number">
+        <field name="NUM">1</field>
+      </shadow>
+    </value>
+    <value name="C">
+    <shadow type="math_number">
+      <field name="NUM">1</field>
+    </shadow>
+  </value>
+  </block>
+
+  <block type="math_arithmetic_3vars_parentheses">
+  <value name="A">
+    <shadow type="math_number">
+      <field name="NUM">1</field>
+    </shadow>
+  </value>
+  <value name="B">
+    <shadow type="math_number">
+      <field name="NUM">1</field>
+    </shadow>
+  </value>
+  <value name="C">
+  <shadow type="math_number">
+    <field name="NUM">1</field>
+  </shadow>
+</value>
+</block>
+    
     <block type="math_single">
       <value name="NUM">
         <shadow type="math_number">
@@ -442,6 +481,7 @@ var toolBox = `
 
   <category name="Visualization" colour="%{BKY_LOGIC_HUE}">
     <block type="draw_line"></block>
+
   </category>
 
   <category name="遗传" colour="#5ba55b">
@@ -470,6 +510,13 @@ var toolBox = `
   <category name="hanoi" colour="#5b67a5">
     <block type="move"></block>
     <block type="set_pillar"></block>
+  </category>
+
+  
+  <category name="koch" colour="#5b23a5">
+    <block type="draw_custom_shape"></block>
+    <block type="create_point"></block>
+    <block type="get_coordinate"></block>
   </category>
 
 `;

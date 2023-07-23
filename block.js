@@ -1260,5 +1260,328 @@ Blockly.JavaScript['list_remove_and_random'] = function (block) {
     "\n";
 
   return [code, Blockly.JavaScript.ORDER_ATOMIC];
-  // return code;
+
 };
+
+Blockly.defineBlocksWithJsonArray([
+  {
+    "type": "draw_custom_shape",
+    "message0": "使用点%1，%2，%3，%4，%5绘制新的连线",
+    "args0": [
+      {
+        "type": "input_value",
+        "name": "POINT1",
+        "check": null
+      },
+      {
+        "type": "input_value",
+        "name": "POINT2",
+        "check": null
+      },
+      {
+        "type": "input_value",
+        "name": "POINT3",
+        "check": null
+      },
+      {
+        "type": "input_value",
+        "name": "POINT4",
+        "check": null
+      },
+      {
+        "type": "input_value",
+        "name": "POINT5",
+        "check": null
+      }
+    ],
+    "previousStatement": null,
+    "nextStatement": null,
+    // "output": null,
+    "colour": 230,
+    "tooltip": "绘制自定义形状",
+    "helpUrl": ""
+  }
+]);
+
+Blockly.JavaScript['draw_custom_shape'] = function (block) {
+  var point1 = Blockly.JavaScript.valueToCode(block, 'POINT1', Blockly.JavaScript.ORDER_ATOMIC);
+  var point2 = Blockly.JavaScript.valueToCode(block, 'POINT2', Blockly.JavaScript.ORDER_ATOMIC);
+  var point3 = Blockly.JavaScript.valueToCode(block, 'POINT3', Blockly.JavaScript.ORDER_ATOMIC);
+  var point4 = Blockly.JavaScript.valueToCode(block, 'POINT4', Blockly.JavaScript.ORDER_ATOMIC);
+  var point5 = Blockly.JavaScript.valueToCode(block, 'POINT5', Blockly.JavaScript.ORDER_ATOMIC);
+
+  // 去除多余的点变量声明，直接使用数组
+  var points = [point1, point2, point3, point4, point5];
+
+  // 使用 JSON.parse() 将字符串转换为数组并将 item 包装成一个数组
+  var code = `
+    draw([${JSON.parse(JSON.stringify(points))}]); // 传入绘制点的数组
+  `;
+
+  return code;
+};
+
+
+
+
+Blockly.defineBlocksWithJsonArray([
+  {
+    "type": "create_point",
+    "message0": "坐标点（ %1 ， %2)",
+    "args0": [
+      {
+        "type": "input_value",
+        "name": "X_VALUE",
+        "check": "Number"
+      },
+      {
+        "type": "input_value",
+        "name": "Y_VALUE",
+        "check": "Number"
+      }
+    ],
+    "output": "map",
+    "colour": 230,
+    "tooltip": "创建一个点对象",
+    "helpUrl": ""
+  }
+]);
+
+Blockly.JavaScript['create_point'] = function (block) {
+  var xValue = Blockly.JavaScript.valueToCode(block, 'X_VALUE', Blockly.JavaScript.ORDER_ATOMIC);
+  var yValue = Blockly.JavaScript.valueToCode(block, 'Y_VALUE', Blockly.JavaScript.ORDER_ATOMIC);
+
+  // 构造点对象
+  var code = `{ x: ${xValue}, y: ${yValue} }`;
+
+  return [code, Blockly.JavaScript.ORDER_ATOMIC];
+};
+
+
+Blockly.defineBlocksWithJsonArray([
+  {
+    "type": "get_coordinate",
+    "message0": "点 %1 的 %2 坐标",
+    "args0": [
+      {
+        "type": "input_value",
+        "name": "POINT",
+        "check": "Point"
+      },
+      {
+        "type": "field_dropdown",
+        "name": "COORDINATE",
+        "options": [
+          ["横", "X"],
+          ["纵", "Y"]
+        ]
+      }
+    ],
+    "output": "Number",
+    "colour": 230,
+    "tooltip": "获取点对象的指定坐标值",
+    "helpUrl": ""
+  }
+]);
+
+Blockly.JavaScript['get_coordinate'] = function (block) {
+  var point = Blockly.JavaScript.valueToCode(block, 'POINT', Blockly.JavaScript.ORDER_ATOMIC);
+  var coordinate = block.getFieldValue('COORDINATE');
+
+  // 获取点对象的指定坐标值
+  var code = `${point}.${coordinate.toLowerCase()}`;
+
+  return [code, Blockly.JavaScript.ORDER_ATOMIC];
+};
+
+
+
+
+
+
+
+Blockly.Blocks['math_arithmetic_3vars'] = {
+  init: function () {
+    this.jsonInit({
+      "message0": "%1 %2 %3 %4 %5",
+      "args0": [
+        {
+          "type": "input_value",
+          "name": "A",
+          "check": "Number"
+        },
+        {
+          "type": "field_dropdown",
+          "name": "OP1",
+          "options": [
+            ["+", "ADD"],
+            ["-", "MINUS"],
+            ["*", "MULTIPLY"],
+            ["/", "DIVIDE"]
+          ]
+        },
+        {
+          "type": "input_value",
+          "name": "B",
+          "check": "Number"
+        },
+        {
+          "type": "field_dropdown",
+          "name": "OP2",
+          "options": [
+            ["+", "ADD"],
+            ["-", "MINUS"],
+            ["*", "MULTIPLY"],
+            ["/", "DIVIDE"]
+          ]
+        },
+        {
+          "type": "input_value",
+          "name": "C",
+          "check": "Number"
+        }
+      ],
+      "output": "Number",
+      "inputsInline": true,
+      "colour": 230,
+      "tooltip": "",
+      "helpUrl": ""
+    });
+  }
+};
+
+Blockly.JavaScript['math_arithmetic_3vars'] = function (block) {
+  var value_a = Blockly.JavaScript.valueToCode(block, 'A', Blockly.JavaScript.ORDER_ATOMIC);
+  var dropdown_op1 = block.getFieldValue('OP1');
+  var symbols_op1 = {
+    'ADD': '+',
+    'MINUS': '-',
+    'MULTIPLY': '*',
+    'DIVIDE': '/'
+  };
+  var symbol_op1 = symbols_op1[dropdown_op1];
+
+  var value_b = Blockly.JavaScript.valueToCode(block, 'B', Blockly.JavaScript.ORDER_ATOMIC);
+  var dropdown_op2 = block.getFieldValue('OP2');
+  var symbols_op2 = {
+    'ADD': '+',
+    'MINUS': '-',
+    'MULTIPLY': '*',
+    'DIVIDE': '/'
+  };
+  var symbol_op2 = symbols_op2[dropdown_op2];
+
+  var value_c = Blockly.JavaScript.valueToCode(block, 'C', Blockly.JavaScript.ORDER_ATOMIC);
+
+  var code = value_a + ' ' + symbol_op1 + ' ' + value_b + ' ' + symbol_op2 + ' ' + value_c;
+  return [code, Blockly.JavaScript.ORDER_NONE];
+};
+
+
+Blockly.Blocks['math_arithmetic_3vars_parentheses'] = {
+  init: function () {
+    this.jsonInit({
+      "message0": "(%1 %2 %3) %4 %5",
+      "args0": [
+        {
+          "type": "input_value",
+          "name": "A",
+          "check": "Number"
+        },
+        {
+          "type": "field_dropdown",
+          "name": "OP1",
+          "options": [
+            ["+", "ADD"],
+            ["-", "MINUS"],
+            ["*", "MULTIPLY"],
+            ["/", "DIVIDE"]
+          ]
+        },
+        {
+          "type": "input_value",
+          "name": "B",
+          "check": "Number"
+        },
+        {
+          "type": "field_dropdown",
+          "name": "OP2",
+          "options": [
+            ["*", "MULTIPLY"],
+            ["+", "ADD"],
+            ["-", "MINUS"],
+
+            ["/", "DIVIDE"]
+          ],
+          "defaultValue": "MULTIPLY"  // 设置默认选项值为 "MULTIPLY"
+        },
+        {
+          "type": "input_value",
+          "name": "C",
+          "check": "Number"
+        }
+      ],
+      "output": "Number",
+      "inputsInline": true,
+      "colour": 230,
+      "tooltip": "",
+      "helpUrl": ""
+    });
+  }
+};
+
+Blockly.JavaScript['math_arithmetic_3vars_parentheses'] = function (block) {
+  var value_a = Blockly.JavaScript.valueToCode(block, 'A', Blockly.JavaScript.ORDER_ATOMIC);
+  var dropdown_op1 = block.getFieldValue('OP1');
+  var symbols_op1 = {
+    'ADD': '+',
+    'MINUS': '-',
+    'MULTIPLY': '*',
+    'DIVIDE': '/'
+  };
+  var symbol_op1 = symbols_op1[dropdown_op1];
+
+  var value_b = Blockly.JavaScript.valueToCode(block, 'B', Blockly.JavaScript.ORDER_ATOMIC);
+  var dropdown_op2 = block.getFieldValue('OP2');
+  var symbols_op2 = {
+    'ADD': '+',
+    'MINUS': '-',
+    'MULTIPLY': '*',
+    'DIVIDE': '/'
+  };
+  var symbol_op2 = symbols_op2[dropdown_op2];
+
+  var value_c = Blockly.JavaScript.valueToCode(block, 'C', Blockly.JavaScript.ORDER_ATOMIC);
+
+  var code = '(' + value_a + ' ' + symbol_op1 + ' ' + value_b + ') ' + symbol_op2 + ' ' + value_c;
+  return [code, Blockly.JavaScript.ORDER_NONE];
+};
+
+
+
+Blockly.Blocks['internal_variables_set'] = {
+  init: function () {
+    this.appendValueInput('VALUE')
+      .setCheck(null)
+      .appendField('set internal variable')
+      .appendField(new Blockly.FieldVariable(), 'VAR')
+      .appendField('to');
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(230);
+    this.setTooltip('');
+    this.setHelpUrl('');
+    this.setStyle('variable_blocks'); // 样式名称
+  }
+};
+
+Blockly.JavaScript['internal_variables_set'] = function (block) {
+  var variable_name = Blockly.JavaScript.variableDB_.getName(
+    block.getFieldValue('VAR'), Blockly.Variables.NAME_TYPE);
+  var value = Blockly.JavaScript.valueToCode(block, 'VALUE',
+    Blockly.JavaScript.ORDER_ASSIGNMENT) || '0';
+  var code = 'var ' + variable_name + ' = ' + value + ';\n'; // 将变量定义为内部变量
+  return code;
+};
+
+

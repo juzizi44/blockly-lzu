@@ -60,3 +60,25 @@
 可视化结果如下
 
 ![image-20230713151134963](./assets/image-20230713151134963.png)
+
+## 增加三门案例
+
+![0b9b3e59d959ef68b5a9119bdc9aa37](./assets/0b9b3e59d959ef68b5a9119bdc9aa37.png)
+
+![5499a46819aea9045c9679aa41fae86](./assets/5499a46819aea9045c9679aa41fae86.png)
+
+list里面增加了几个块
+
+![951c3288b17bfffebf6661eeb25b852](./assets/951c3288b17bfffebf6661eeb25b852.png)
+
+## 增加科赫曲线案例
+
+为了方便计算，增加了一些块
+
+![image-20230723220019819](./assets/image-20230723220019819.png)
+
+![image-20230723220059292](./assets/image-20230723220059292.png)
+
+结果如下：
+
+![image-20230723220116877](./assets/image-20230723220116877.png)
