@@ -290,6 +290,20 @@
   <script src="hanoi/js/vue.global.js"></script>
   <script src="hanoi/js/hanoi-list.js"></script>
   <script src="hanoi/js/common_blockly_try.js"></script>
+  <script>
+    window.addEventListener('DOMContentLoaded', function () {
+      var navItems = document.querySelectorAll('li.nav-item');
+      var targetHref = 'hanoi.html';
+
+      navItems.forEach(function (item) {
+        var link = item.querySelector('a.nav-link');
+        if (link.getAttribute('href') === targetHref) {
+          link.classList.add('active');
+        }
+      });
+    });
+
+  </script>
 
 </body>
 

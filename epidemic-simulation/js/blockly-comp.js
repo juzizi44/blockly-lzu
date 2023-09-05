@@ -372,12 +372,12 @@ Blockly.JavaScript['value_is_pcr'] = function(block) {
   var code = `getIsAsymptomaticOrSymptomatic(environment.person, ${number_fack_n}, ${number_fack_e})`;
   return [code, Blockly.JavaScript.ORDER_ATOMIC];
 };
-const workspace = Blockly.inject('blockly-container', {
-  toolbox: document.getElementById('toolbox'),
-  // media: 'lib/media',
+const workspace = Blockly.inject("blockly-container", {
+  toolbox: document.getElementById("toolbox"),
+  media: "media/",
   trashcan: true,
-  maxTrashcanContents: 5
-})
+  maxTrashcanContents: 5,
+});
 Blockly.Xml.domToWorkspace(document.getElementById("workspaceBlocks"), workspace)
 workspace.addChangeListener((event) => {
   const code = Blockly.JavaScript.workspaceToCode(workspace)

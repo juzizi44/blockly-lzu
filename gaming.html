@@ -194,6 +194,22 @@
             }
         })
         workspace.toolbox_.contentsDiv_.append(buttonAddT)
+
+
+
+    window.addEventListener('DOMContentLoaded', function () {
+        var navItems = document.querySelectorAll('li.nav-item');
+        var targetHref = 'gaming.html';
+
+        navItems.forEach(function (item) {
+            var link = item.querySelector('a.nav-link');
+            if (link.getAttribute('href') === targetHref) {
+                link.classList.add('active');
+            }
+        });
+    });
+
+
     </script>
 
 </body>

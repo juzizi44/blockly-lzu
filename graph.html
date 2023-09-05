@@ -275,7 +275,7 @@
                 {
                     collapse: false,
                     disable: false,
-                    // media: '../../media/',
+                    media: 'media/',
                     toolbox: document.getElementById('toolbox')
                 });
             Blockly.Xml.domToWorkspace(document.getElementById('startBlocks'),
@@ -290,9 +290,25 @@
         window.addEventListener('load', Graph.init);
         window.addEventListener('resize', Graph.resize);
 
+        
+
     </script>
 
+<script>
 
+    window.addEventListener('DOMContentLoaded', function () {
+      var navItems = document.querySelectorAll('li.nav-item');
+      var targetHref = 'graph.html';
+
+      navItems.forEach(function (item) {
+        var link = item.querySelector('a.nav-link');
+        if (link.getAttribute('href') === targetHref) {
+          link.classList.add('active');
+        }
+      });
+    });
+
+  </script>
 
 </body>
 

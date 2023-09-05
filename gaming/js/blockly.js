@@ -1,8 +1,10 @@
-const workspace = Blockly.inject('blocklyDiv',
-    {
-        // media: '../../media/',
-        toolbox: document.getElementById('toolbox')
-    })
+const workspace = Blockly.inject("blocklyDiv", {
+  // media: '../../media/',
+  toolbox: document.getElementById("toolbox"),
+  media: "media/",
+  trashcan: true,
+  maxTrashcanContents: 5,
+});
 
 Blockly.defineBlocksWithJsonArray([{
     "type": "value_cooperation",

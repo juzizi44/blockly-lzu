@@ -57,6 +57,29 @@
   border-radius: 5px;
   overflow: hidden;
 }
+.tip-normal {
+    color: #000;
+}
+
+.tip-asymptomatic {
+    color: #f4e037;
+}
+
+.tip-symptomatic {
+    color: #f00;
+}
+
+.tip-vaccinated {
+    color: #0f0;
+}
+
+.tip-immune {
+    color: #0f0;
+}
+
+.tip-dead {
+    color: #ccc
+}
 
 
     </style>
@@ -85,8 +108,9 @@
                             结果可视化:
                         </h3>
                         <div class="row" style="margin-bottom: 20px;">
-                            <div class="col-md-4" style="overflow: hidden;">
-                                <div id="canvas-container" style="max-width: 100%; max-height: 495px; overflow: hidden;">
+                            <div class="col-md-12" style="overflow: hidden;">
+                                <div id="canvas-container"
+                                    style="max-width: 100%; max-height: 600px; overflow: hidden;margin-left: 28%;margin-bottom: 10px;">
                                     <div id="con-pan">
                                         <p id="status" style="text-align: left;"></p>
                                         <textarea name="" id="textarea" cols="30" rows="3" style="display: none;"></textarea>
@@ -102,10 +126,10 @@
                                     <canvas id="canvas-2"></canvas>
                                 </div>
                             </div>
-                            <div class="col-md-8" style="overflow: hidden;">
-                                <div id="statis" style="height: 280px;">
+                            <div class="col-md-12" style="overflow: hidden;">
+                                <div id="statis" style="height: 550px;margin-bottom: 10px;">
                                     
-                                    <div id="statis-canvas-box">
+                                    <div id="statis-canvas-box"
                                         <p >
                                             <a style="margin-left: 50%;font-size: 20px;color:coral;">统计图</a>
                                             
@@ -262,7 +286,10 @@
         // 统计图渲染逻辑
         const statisRender = new StaticRender(
             document.getElementById("statis-canvas-bg"),
-            mainRenderer.colors
+            mainRenderer.colors,
+
+
+            
         )
     </script>
     <script>
@@ -315,6 +342,20 @@
         })
     </script>
 
+<script>
+
+    window.addEventListener('DOMContentLoaded', function () {
+        var navItems = document.querySelectorAll('li.nav-item');
+        var targetHref = 'epidemic_simulation.html';
+        navItems.forEach(function (item) {
+            var link = item.querySelector('a.nav-link');
+            if (link.getAttribute('href') === targetHref) {
+                link.classList.add('active');
+            }
+        });
+    });
+
+</script>
 
 </body>
 

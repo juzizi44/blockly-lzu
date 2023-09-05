@@ -29,11 +29,11 @@ class MainRenderer {
 
 function tipRenderer(healthStatus) {
     return `
-    <a class="tip-normal">正常:${healthStatus.normal}</a>
+    <a class="tip-normal" >正常:${healthStatus.normal}</a>
     <a class="tip-asymptomatic">感染(无症状):${healthStatus.asymptomatic}</a>
     <a class="tip-symptomatic">感染(有症状):${healthStatus.symptomatic}</a>
     <a class="tip-vaccinated">免疫:${healthStatus.vaccinated}</a>
     <a class="tip-immune">治愈:${healthStatus.immune}</a>
     <a class="tip-dead">死亡:${healthStatus.dead}</a>
-    `
+    `;
 }

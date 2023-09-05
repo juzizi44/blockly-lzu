@@ -559,12 +559,7 @@ Blockly.JavaScript['draw_function'] = function(block) {
         Graph.drawVisualization()
     }
 
-    function showCode() {
-        // Generate JavaScript code and display it.
-        Blockly.JavaScript.INFINITE_LOOP_TRAP = null;
-        var code = Blockly.JavaScript.workspaceToCode(Graph.workspace);
-        alert(code);
-    }
+  
 
     function runCode() {
         // Generate JavaScript code and run it.
